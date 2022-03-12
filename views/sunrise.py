@@ -24,7 +24,7 @@ WEATHER_CONDITION_ICON_MAP = {
 }
 
 
-class WeatherView(BaseView):
+class SunriseView(BaseView):
     _render_delay = 0.05
 
     def __init__(self, rgb_matrix: RGBMatrix):

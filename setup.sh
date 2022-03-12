@@ -12,6 +12,10 @@ git fetch origin --prune
 git pull
 make
 echo "Done."
+cd ..
+echo "Running make..."
+make
+echo "Done."
 echo -e "\nYou'll need a config.json file to customize your settings."
 read -p "Would you like to create a new one from a template now? [Y/n] " answer
 if [ "$answer" != "${answer#[Yy]}" ] ;then

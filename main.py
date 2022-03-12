@@ -78,7 +78,7 @@ options = get_rgb_matrix_options(args=args)
 rgb_matrix = RGBMatrix(options=options)
 
 # Start the main controller - CTRL-C to exit
-print(f"Running rpi-mlb-scoreboard-({rgb_matrix.height}x{rgb_matrix.width})")
+print(f"Running sunrise-alarm-clock-({rgb_matrix.height}x{rgb_matrix.width})")
 main_controller = MainController(rgb_matrix=rgb_matrix)
 main_controller.start()
 try:
