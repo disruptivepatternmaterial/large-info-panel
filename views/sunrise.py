@@ -15,6 +15,7 @@ class SunriseView(BaseView):
     _render_delay = 1
 
     def _render(self):
+        return
         # Get weather data
         weather_data = Data.get("weather")
         if not weather_data:
@@ -24,8 +25,7 @@ class SunriseView(BaseView):
         # Calculate position, size, color, etc.
         start_time = weather_data.current.sunrise
         end_time = start_time + timedelta(minutes=duration)
-        #current_time = datetime.now()
-        current_time = start_time + timedelta(minutes=60)
+        current_time = datetime.now()
         progress = (1-(end_time-current_time).seconds / (end_time-start_time).seconds)
         height = math.ceil(self._rgb_matrix.height * progress)
         color = graphics.Color(
