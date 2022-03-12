@@ -1,4 +1,7 @@
+import math
 from datetime import datetime, timedelta
+
+from rgbmatrix import graphics
 
 from config import Config
 from data import Data
@@ -18,16 +21,18 @@ class SunriseView(BaseView):
             return
         # Get duration
         duration = Config.get()["sunrise"]["duration"]
-        # Calculate position, size, etc.
+        # Calculate position, size, color, etc.
         start_time = weather_data.current.sunrise
         end_time = start_time + timedelta(minutes=duration)
         #current_time = datetime.now()
-        current_time = start_time + timedelta(minutes=20)
-        progress = (end_time-current_time).seconds / (end_time-start_time).seconds
-        print(progress)
-        height = int(self._rgb_matrix.height * (1-progress))
-        print(self._rgb_matrix.height)
-        print(height)
+        current_time = start_time + timedelta(minutes=60)
+        progress = (1-(end_time-current_time).seconds / (end_time-start_time).seconds)
+        height = math.ceil(self._rgb_matrix.height * progress)
+        color = graphics.Color(
+            Color.YELLOW.value.red * progress,
+            Color.YELLOW.value.green * progress,
+            Color.YELLOW.value.blue * progress,
+        )
         # Render sunrise
         draw_rectangle(
             canvas=self._offscreen_canvas,
@@ -35,5 +40,5 @@ class SunriseView(BaseView):
             y_pos=self._rgb_matrix.height-height,
             height=height,
             width=self._rgb_matrix.width,
-            color=Color.YELLOW.value,
+            color=color,
         )

@@ -9,6 +9,10 @@ class Gradient:
         self._colors = colors
         self._index = 0
 
+    @property
+    def colors(self) -> List[graphics.Color]:
+        return self._colors
+
     def advance_color(self) -> bool:
         """
         Returns whether the gradient was reset
