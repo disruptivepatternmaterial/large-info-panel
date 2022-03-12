@@ -1,1 +1,1 @@
-# rpi-mlb-scoreboard
+# sunrise-alarm-clock
