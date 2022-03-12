@@ -23,14 +23,17 @@ class OpenWeatherAPIClient(APIClient):
         config = Config.get()
         if not location:
             location = config["weather"]["location"]
+        print("Fetching weather data...")
         response = cls._make_request(
             method=RequestMethod.GET,
             path="weather",
             params=dict(q=location, units=config["weather"]["units"]),
         )
+        print(f"RESPONSE: {response}")
         return Weather(
             temperature=int(response["main"]["temp"]),
             condition=response["weather"][0]["main"],
+            sunrise=response["sys"]["sunrise"],
         )
 
 
