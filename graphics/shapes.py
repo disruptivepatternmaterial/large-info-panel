@@ -15,6 +15,29 @@ def _draw_line(
         canvas.SetPixel(j, y_pos, color.red, color.green, color.blue)
 
 
+def draw_rectangle(
+    canvas: FrameCanvas,
+    x_pos: int,
+    y_pos: int,
+    width: int,
+    height: int,
+    color: graphics.Color,
+    outline_only=False,
+):
+    lower_bound = y_pos
+    upper_bound = y_pos + height
+    for i in range(lower_bound, upper_bound):
+        endpoints_only = outline_only and i > lower_bound and i < upper_bound - 1
+        _draw_line(
+            canvas=canvas,
+            y_pos=i,
+            x1=x_pos,
+            x2=x_pos + width,
+            endpoints_only=endpoints_only,
+            color=color,
+        )
+
+
 def draw_square(
     canvas: FrameCanvas,
     x_pos: int,
@@ -23,18 +46,15 @@ def draw_square(
     color: graphics.Color,
     outline_only=False,
 ):
-    lower_bound = y_pos
-    upper_bound = y_pos + size
-    for i in range(lower_bound, upper_bound):
-        endpoints_only = outline_only and i > lower_bound and i < upper_bound - 1
-        _draw_line(
-            canvas=canvas,
-            y_pos=i,
-            x1=x_pos,
-            x2=x_pos + size,
-            endpoints_only=endpoints_only,
-            color=color,
-        )
+    draw_rectangle(
+        canvas=canvas,
+        x_pos=x_pos,
+        y_pos=y_pos,
+        width=size,
+        height=size,
+        color=color,
+        outline_only=outline_only,
+    )
 
 
 def draw_diamond(

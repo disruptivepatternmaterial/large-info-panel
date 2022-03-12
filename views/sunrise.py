@@ -7,7 +7,7 @@ from config import Config
 from data import Data
 from graphics.color import Color
 from graphics.font import Font, FontStyle
-from graphics.shapes import draw_square
+from graphics.shapes import draw_rectangle
 from graphics.utils import center_object
 from utils import get_abs_file_path
 from views.base_views import BaseView
@@ -67,16 +67,17 @@ class SunriseView(BaseView):
     def _render(self):
         # Get weather data
         weather_data = Data.get("weather")
-
         # Get duration
         duration = Config.get()["sunrise"]["duration"]
-
+        # Calculate position, size, etc.
+        height = 1
         # Render sunrise
-        draw_square(
+        draw_rectangle(
             canvas=self._offscreen_canvas,
             x_pos=0,
-            y_pos=10,
-            size=5,
+            y_pos=self._rgb_matrix.height-1,
+            height=height,
+            width=self._rgb_matrix.width,
             color=Color.YELLOW.value,
         )
         """
