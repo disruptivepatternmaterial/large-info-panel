@@ -22,10 +22,10 @@ class SunriseView(BaseView):
         start_time = weather_data.current.sunrise
         end_time = start_time + timedelta(minutes=duration)
         #current_time = datetime.now()
-        current_time = start_time + timedelta(minutes=5)
+        current_time = start_time + timedelta(minutes=20)
         progress = (end_time-current_time).seconds / (end_time-start_time).seconds
         print(progress)
-        height = int(self._rgb_matrix.height * progress)
+        height = int(self._rgb_matrix.height * (1-progress))
         print(self._rgb_matrix.height)
         print(height)
         # Render sunrise
