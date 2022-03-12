@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from weather.constants import WeatherCondition
 
 
@@ -8,7 +10,7 @@ class Weather:
             self.condition = WeatherCondition(condition)
         except ValueError:
             self.condition = WeatherCondition.CLOUDS
-        self.sunrise = sunrise
+        self.sunrise = datetime.fromtimestamp(sunrise)
 
 
 class WeatherData:
