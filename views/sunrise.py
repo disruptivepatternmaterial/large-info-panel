@@ -15,7 +15,6 @@ class SunriseView(BaseView):
     _render_delay = 1
 
     def _render(self):
-        return
         # Get weather data
         weather_data = Data.get("weather")
         if not weather_data:
@@ -27,11 +26,14 @@ class SunriseView(BaseView):
         end_time = start_time + timedelta(minutes=duration)
         current_time = datetime.now()
         progress = (1-(end_time-current_time).seconds / (end_time-start_time).seconds)
+        # Progress > 1 doesn't make any sense
+        if progress > 1:
+            progress = 1
         height = math.ceil(self._rgb_matrix.height * progress)
         color = graphics.Color(
-            Color.YELLOW.value.red * progress,
-            Color.YELLOW.value.green * progress,
-            Color.YELLOW.value.blue * progress,
+            Color.ORANGE.value.red * progress,
+            Color.ORANGE.value.green * progress,
+            Color.ORANGE.value.blue * progress,
         )
         # Render sunrise
         draw_rectangle(
