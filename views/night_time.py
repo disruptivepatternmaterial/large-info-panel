@@ -2,7 +2,7 @@ from datetime import datetime
 
 from rgbmatrix import graphics, RGBMatrix
 
-from animations.outline_canvas import OutlineCanvasAnimation
+from animations.pulsing_text import PulsingTextAnimation
 from config import Config
 from graphics.color import Color
 from graphics.font import Font, FontStyle
