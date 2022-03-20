@@ -25,7 +25,7 @@ class NightTimeView(BaseView):
             font=font,
             x_pos=x_pos,
             y_pos=15,
-            gradient=Gradient.c(
+            gradient=Gradient(
                 color=color,
                 percentages=[0.2, 0.4, 0.6, 0.8, 1],
             ),
