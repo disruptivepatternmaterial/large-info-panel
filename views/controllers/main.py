@@ -8,6 +8,7 @@ from data import Data
 from views.clock import ClockView
 from views.controllers.base_controllers import BaseController
 from views.controllers.looping_threads import LoopingThreadsController
+from views.night_time import NightTimeView
 from views.sunrise import SunriseView
 from views.weather import WeatherView
 
@@ -36,13 +37,18 @@ class MainController(BaseController):
             ],
             thread_change_delay=10,
         )
+        self._night_time_controller = RestartableThread(
+            thread=NightTimeView,
+            rgb_matrix=self._rgb_matrix,
+        )
         self._sunrise_controller = RestartableThread(
             thread=SunriseView,
             rgb_matrix=self._rgb_matrix,
         )
-        self._set_current_thread(thread=self._clock_and_weather_controller)
+        self._set_current_thread(thread=self._night_time_controller)
 
     def _update_thread(self):
+        return
         weather_data = Data.get("weather")
         if not weather_data:
             return
@@ -55,6 +61,11 @@ class MainController(BaseController):
             # Only switch views if we aren't showing it already
             if self._current_thread != self._sunrise_controller:
                 self._switch_thread(thread=self._sunrise_controller)
+        # Switch to the night time view
+        elif current_time.hour >= 23:
+            # Only switch views if we aren't showing it already
+            if self._current_thread != self._night_time_controller:
+                self._switch_thread(thread=self._night_time_controller)
         # Switch to the clock and weather view
         else:
             # Only switch views if we aren't showing it already
