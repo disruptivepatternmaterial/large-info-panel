@@ -45,10 +45,9 @@ class MainController(BaseController):
             thread=SunriseView,
             rgb_matrix=self._rgb_matrix,
         )
-        self._set_current_thread(thread=self._night_time_controller)
+        self._set_current_thread(thread=self._clock_and_weather_controller)
 
     def _update_thread(self):
-        return
         weather_data = Data.get("weather")
         if not weather_data:
             return
@@ -62,7 +61,7 @@ class MainController(BaseController):
             if self._current_thread != self._sunrise_controller:
                 self._switch_thread(thread=self._sunrise_controller)
         # Switch to the night time view
-        elif current_time.hour >= 23:
+        elif current_time.hour >= Config.get()["night_time"]["start_time"]:
             # Only switch views if we aren't showing it already
             if self._current_thread != self._night_time_controller:
                 self._switch_thread(thread=self._night_time_controller)

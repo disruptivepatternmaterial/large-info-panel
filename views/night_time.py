@@ -23,7 +23,7 @@ class NightTimeView(BaseView):
         super().__init__(rgb_matrix)
         text = "Zzz.."
         font, font_size = Font.get_font(FontStyle.LARGE)
-        color = Color.YELLOW.value
+        color = Config.get()["night_time"]["text_color"]
         x_pos = center_text(center_pos=18, text=text, font_width=font_size["width"])
         self._pulsing_text_animation = PulsingTextAnimation(
             text=text,

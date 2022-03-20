@@ -6,6 +6,10 @@
 	"sunrise": {
 		"duration": 60
 	},
+	"night_time": {
+		"start_time": 23,
+		"text_color": [255, 255, 0]
+	},
 	"weather": {
 		"api_key": "YOUR_API_KEY_HERE",
 		"location": "Toronto,on,ca",
