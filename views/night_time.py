@@ -12,7 +12,7 @@ from views.base_views import BaseView
 
 
 class NightTimeView(BaseView):
-    _render_delay = 0.2
+    _render_delay = 0.5
 
     def __init__(self, rgb_matrix: RGBMatrix):
         super().__init__(rgb_matrix)
@@ -27,7 +27,7 @@ class NightTimeView(BaseView):
             y_pos=15,
             gradient=Gradient.generate_brightness_gradient(
                 color=color,
-                percentages=[0.2, 0.4, 0.6, 0.8, 1],
+                percentages=[i / 25 for i in range(0,25)],
             ),
         )
 
