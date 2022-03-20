@@ -67,6 +67,6 @@ class Gradient:
         r = color.red
         g = color.green
         b = color.blue
-        for percent in sorted(percentages):
+        for percent in percentages:
             colors.append(graphics.Color(r * percent, g * percent, b * percent))
         return cls(colors=colors)
