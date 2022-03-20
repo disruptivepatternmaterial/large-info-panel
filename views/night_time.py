@@ -3,10 +3,10 @@ from datetime import datetime
 from rgbmatrix import graphics, RGBMatrix
 
 from animations.pulsing_text import PulsingTextAnimation
-from color.gradient import Gradient
 from config import Config
 from graphics.color import Color
 from graphics.font import Font, FontStyle
+from graphics.gradient import Gradient
 from graphics.utils import center_text
 from views.base_views import BaseView
 
