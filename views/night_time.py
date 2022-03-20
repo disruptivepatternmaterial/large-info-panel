@@ -29,7 +29,7 @@ class NightTimeView(BaseView):
                 color=color,
                 percentages=[0.2, 0.4, 0.6, 0.8, 1],
             ),
-        ),
+        )
 
     def _render(self):
         self._pulsing_text_animation.render(canvas=self._offscreen_canvas)
