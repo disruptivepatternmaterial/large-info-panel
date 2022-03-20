@@ -3,6 +3,7 @@ from datetime import datetime
 from rgbmatrix import graphics, RGBMatrix
 
 from animations.pulsing_text import PulsingTextAnimation
+from color.gradient import Gradient
 from config import Config
 from graphics.color import Color
 from graphics.font import Font, FontStyle
