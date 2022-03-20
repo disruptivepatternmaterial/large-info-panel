@@ -10,9 +10,14 @@ from graphics.gradient import Gradient
 from graphics.utils import center_text
 from views.base_views import BaseView
 
+BRIGHTNESS_PERCENTAGES = [
+    i / 100
+    for i in range(0, 100)
+][:80]
+
 
 class NightTimeView(BaseView):
-    _render_delay = 0.5
+    _render_delay = 0.2
 
     def __init__(self, rgb_matrix: RGBMatrix):
         super().__init__(rgb_matrix)
@@ -27,7 +32,7 @@ class NightTimeView(BaseView):
             y_pos=15,
             gradient=Gradient.generate_brightness_gradient(
                 color=color,
-                percentages=[i / 25 for i in range(0,25)],
+                percentages=[*BRIGHTNESS_PERCENTAGES, *BRIGHTNESS_PERCENTAGES[::-1]],
             ),
         )
 
