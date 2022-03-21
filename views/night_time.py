@@ -11,13 +11,13 @@ from graphics.utils import center_text
 from views.base_views import BaseView
 
 BRIGHTNESS_PERCENTAGES = [
-    i / 50
-    for i in range(0, 50)
-][:10]
+    i / 100
+    for i in range(0, 100)
+][:20]
 
 
 class NightTimeView(BaseView):
-    _render_delay = 0.05
+    _render_delay = 0.1
 
     def __init__(self, rgb_matrix: RGBMatrix):
         super().__init__(rgb_matrix)
