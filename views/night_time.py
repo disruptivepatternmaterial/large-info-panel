@@ -13,7 +13,7 @@ from views.base_views import BaseView
 BRIGHTNESS_PERCENTAGES = [
     i / 50
     for i in range(0, 50)
-][:20]
+][:10]
 
 
 class NightTimeView(BaseView):
