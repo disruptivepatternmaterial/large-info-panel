@@ -26,9 +26,8 @@ class SunriseView(BaseView):
         end_time = start_time + timedelta(minutes=duration)
         current_time = datetime.now()
         progress = (1-(end_time-current_time).seconds / (end_time-start_time).seconds)
-        # Progress > 1 doesn't make any sense
-        if progress > 1:
-            progress = 1
+        # Clamp progress between 0 and 1
+        progress = max(min(progress, 1), 0)
         height = math.ceil(self._rgb_matrix.height * progress)
         color = graphics.Color(
             Color.ORANGE.value.red * progress,
