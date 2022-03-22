@@ -61,7 +61,7 @@ class MainController(BaseController):
             if self._current_thread != self._sunrise_controller:
                 self._switch_thread(thread=self._sunrise_controller)
         # Switch to the night time view
-        elif current_time.hour >= Config.get()["night_time"]["start_time"]:
+        elif current_time.hour >= Config.get()["night_time"]["start_time"] or current_time.hour < sunrise_start:
             # Only switch views if we aren't showing it already
             if self._current_thread != self._night_time_controller:
                 self._switch_thread(thread=self._night_time_controller)
