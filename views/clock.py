@@ -28,7 +28,7 @@ class ClockView(BaseView):
             2,
             6,
             color,
-            "Tor",
+            "Toronto",
         )
 
     def _render_time(self, time: str):
