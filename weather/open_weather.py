@@ -37,5 +37,9 @@ class OpenWeatherAPIClient(APIClient):
 
 class OpenWeatherDataThread(DataThread):
     def _fetch_data(self) -> WeatherData:
-        current_weather = OpenWeatherAPIClient.get_current_weather()
+        try:
+            current_weather = OpenWeatherAPIClient.get_current_weather()
+        # If call fails, just return existing data
+        except:
+            return self._data
         return WeatherData(current=current_weather)
