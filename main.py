@@ -7,28 +7,43 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 from views.controllers.main import MainController
 
-
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--led-rows",
         action="store",
-        help="Display rows. 16 for 16x32, 32 for 32x32. (Default: 16)",
-        default=16,
+        help="Display rows. 16 for 16x32, 32 for 32x32. (Default: 64)",
+        default=64,
         type=int,
     )
     parser.add_argument(
         "--led-cols",
         action="store",
-        help="Panel columns. Typically 32 or 64. (Default: 32)",
-        default=32,
+        help="Panel columns. Typically 32 or 64. (Default: 128)",
+        default=128,
+        type=int,
+    )
+    parser.add_argument(
+        "--led-chain",
+        action="store",
+        help="Slow down writing to GPIO. Range: 0..4. (Default: 2)",
+        default=2,
+        choices=range(5),
+        type=int,
+    )
+    parser.add_argument(
+        "--led-parallel",
+        action="store",
+        help="Slow down writing to GPIO. Range: 0..4. (Default: 3)",
+        default=3,
+        choices=range(5),
         type=int,
     )
     parser.add_argument(
         "--led-brightness",
         action="store",
         help="Sets brightness level. Range: 1..100. (Default: 100)",
-        default=100,
+        default=75,
         type=int,
     )
     parser.add_argument(
@@ -47,8 +62,24 @@ def parse_args():
     parser.add_argument(
         "--led-slowdown-gpio",
         action="store",
-        help="Slow down writing to GPIO. Range: 0..4. (Default: 2)",
-        default=2,
+        help="Slow down writing to GPIO. Range: 0..4. (Default: 3)",
+        default=4,
+        choices=range(5),
+        type=int,
+    )
+    parser.add_argument(
+        "--led-pwm-lsb-nanoseconds",
+        action="store",
+        help="default 50",
+        default=50,
+        choices=range(5),
+        type=int,
+    )
+    parser.add_argument(
+        "--led-pwm-dither-bits",
+        action="store",
+        help="default 2",
+        default=0,
         choices=range(5),
         type=int,
     )
@@ -59,7 +90,11 @@ def get_rgb_matrix_options(args: object) -> RGBMatrixOptions:
     options = RGBMatrixOptions()
     options.rows = args.led_rows
     options.cols = args.led_cols
+    options.chain_length = args.led_chain
+    options.parallel = args.led_parallel
     options.brightness = args.led_brightness
+    options.pwm_lsb_nanoseconds = args.led_pwm_lsb_nanoseconds
+    options.pwm_dither_bits = args.led_pwm_dither_bits
     if args.led_show_refresh:
         options.show_refresh_rate = 1
     if args.led_slowdown_gpio != None:
