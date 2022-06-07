@@ -1,1 +1,1 @@
-# sunrise-alarm-clock
+# info panel aka my own times square
