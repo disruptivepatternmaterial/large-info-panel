@@ -7,39 +7,79 @@ from config import Config
 from graphics.font import Font, FontStyle
 from graphics.utils import center_text
 from views.base_views import BaseView
+from PIL import Image
+import random
+import os
 
 
 class ClockView(BaseView):
-    _render_delay = 0.05
+    _render_delay = .05
 
     def __init__(self, rgb_matrix: RGBMatrix):
         super().__init__(rgb_matrix)
+        self._icon = None
         self._last_minute = None
         self._outline_canvas_animation = OutlineCanvasAnimation(
-            max_cycles=1, wait_until_armed=True
+            max_cycles=None, wait_until_armed=False
         )
 
     def _render_location(self):
         color = graphics.Color(*Config.get()["clock"]["location_color"])
-        font, _ = Font.get_font(FontStyle.TINY)
-        graphics.DrawText(
-            self._offscreen_canvas,
-            font,
-            2,
-            6,
-            color,
-            "Toronto",
-        )
-
-    def _render_time(self, time: str):
-        color = graphics.Color(*Config.get()["clock"]["time_color"])
-        font, font_size = Font.get_font(FontStyle.LARGE)
-        x_pos = center_text(center_pos=16, text=time, font_width=font_size["width"])
+        font, font_size = Font.get_font(FontStyle.MEDIUM)
+        text = "Bellingham, Washington"
+        x_pos = center_text(center_pos=128, text=text, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,
             x_pos,
-            15,
+            21,
+            color,
+            text,
+        )
+        self._icon = Image.open("/home/ntableman/sunrise-alarm-clock/assets/bellinghamflag-30.png")
+        self._icon.resize(
+            (30,18), Image.ANTIALIAS
+        )
+        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 5, 30, unsafe=False)
+        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 55, 30, unsafe=False)
+        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 105, 30, unsafe=False)
+        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 155, 30, unsafe=False)
+        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 205, 30, unsafe=False)
+
+    def _render_time(self):
+        color = graphics.Color(*Config.get()["clock"]["time_color"])
+        font, font_size = Font.get_font(FontStyle.HUGE)
+        time = datetime.now().strftime("%A")
+        x_pos = center_text(center_pos=128, text=time, font_width=font_size["width"])
+        graphics.DrawText(
+            self._offscreen_canvas,
+            font,
+            x_pos,
+            150,
+            color,
+            time,
+        )
+
+        time = datetime.now().strftime("%B %d")
+        x_pos = center_text(center_pos=128, text=time, font_width=font_size["width"])
+        graphics.DrawText(
+            self._offscreen_canvas,
+            font,
+            x_pos,
+            186,
+            color,
+            time,
+        )
+
+        #clock
+        time = datetime.now().strftime("%X") #%X
+        font, font_size = Font.get_font(FontStyle.MASSIVE)
+        x_pos = center_text(center_pos=128, text=time, font_width=font_size["width"])
+        graphics.DrawText(
+            self._offscreen_canvas,
+            font,
+            x_pos,
+            100,
             color,
             time,
         )
@@ -56,7 +96,7 @@ class ClockView(BaseView):
 
         # Render location and time
         self._render_location()
-        self._render_time(time=now.strftime("%I:%M"))
+        self._render_time()
 
         # Render outline animation
         self._outline_canvas_animation.render(canvas=self._offscreen_canvas)

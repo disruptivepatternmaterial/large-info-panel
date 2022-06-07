@@ -18,7 +18,7 @@ class OutlineCanvasAnimation(BaseAnimation):
         self._color = color
         self._gradient = gradient
         self._gradient_index = 0
-        self._length = 3
+        self._length = 12
         self._x1 = 0
         self._x2 = self._x1 + self._length
         self._y1 = 0

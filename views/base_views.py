@@ -7,7 +7,7 @@ from common.threading import StoppableThread
 
 
 class BaseView(StoppableThread, ABC):
-    _render_delay = 1
+    _render_delay = .005
 
     def __init__(self, rgb_matrix: RGBMatrix, *args, **kwargs):
         super().__init__(*args, **kwargs)

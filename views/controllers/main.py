@@ -11,7 +11,7 @@ from views.controllers.looping_threads import LoopingThreadsController
 from views.night_time import NightTimeView
 from views.sunrise import SunriseView
 from views.weather import WeatherView
-
+from views.image import ImageView
 
 class MainController(BaseController):
     def __init__(self, rgb_matrix: RGBMatrix, *args, **kwargs):
@@ -27,15 +27,32 @@ class MainController(BaseController):
                         rgb_matrix=self._rgb_matrix,
                     ),
                 },
+                                {
+                    "key": "image1",
+                    "instance": RestartableThread(
+                        thread=ImageView,
+                        #thread=ClockView,
+                        rgb_matrix=self._rgb_matrix,
+                    ),
+                },
                 {
                     "key": "weather",
                     "instance": RestartableThread(
                         thread=WeatherView,
+                        #thread=ClockView,
+                        rgb_matrix=self._rgb_matrix,
+                    ),
+                },
+                {
+                    "key": "image2",
+                    "instance": RestartableThread(
+                        thread=ImageView,
+                        #thread=ClockView,
                         rgb_matrix=self._rgb_matrix,
                     ),
                 },
             ],
-            thread_change_delay=10,
+            thread_change_delay=Config.get()["timing"]["panelswap"],
         )
         self._night_time_controller = RestartableThread(
             thread=NightTimeView,
@@ -50,6 +67,7 @@ class MainController(BaseController):
     def _update_thread(self):
         weather_data = Data.get("weather")
         if not weather_data:
+            #print("bad wx")
             return
 
         current_time = datetime.now()

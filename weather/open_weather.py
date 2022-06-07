@@ -12,11 +12,13 @@ class OpenWeatherAPIClient(APIClient):
 
     @classmethod
     def _get_base_url(seclslf, *args, **kwargs) -> str:
-        return "https://api.openweathermap.org/data/2.5/"
+        #return "https://api.openweathermap.org/data/2.5/"
+        return "http://192.168.50.10:1880/"
 
     @classmethod
     def _get_api_key(cls, *args, **kwargs) -> str:
-        return Config.get()["weather"]["api_key"]
+        return
+        #return Config.get()["weather"]["api_key"]
 
     @classmethod
     def get_current_weather(cls, location: str = None) -> Weather:
@@ -25,13 +27,18 @@ class OpenWeatherAPIClient(APIClient):
             location = config["weather"]["location"]
         response = cls._make_request(
             method=RequestMethod.GET,
-            path="weather",
-            params=dict(q=location, units=config["weather"]["units"]),
+            path="rgbpanel/environment/",
+            #path="weather",
+            #params=dict(q=location, units=config["weather"]["units"]),
         )
+        #print(response)
         return Weather(
-            temperature=int(response["main"]["temp"]),
-            condition=response["weather"][0]["main"],
-            sunrise=response["sys"]["sunrise"],
+            temperature=float(response[5]["_value"]),
+            #temperature=int(response["main"]["temp"]),
+            condition="SNOW",
+            #condition=response["weather"][0]["main"],
+            sunrise=1664566938,
+            #sunrise=response["sys"]["sunrise"],
         )
 
 

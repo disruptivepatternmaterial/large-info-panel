@@ -31,7 +31,7 @@ class WeatherView(BaseView):
         super().__init__(rgb_matrix)
         self._icon = None
         self._icon_name = None
-        self._font, self._font_size = Font.get_font(FontStyle.TINY)
+        self._font, self._font_size = Font.get_font(FontStyle.HUGE)
 
     def _render_temperature(self, temperature: str, x_pos: int, y_pos: int):
         color = graphics.Color(*Config.get()["weather"]["temperature_color"])
@@ -54,9 +54,10 @@ class WeatherView(BaseView):
     def _render_condition_icon(self, icon_name: str, x_pos: int, y_pos: int):
         if icon_name != self._icon_name:
             self._icon = Image.open(
-                get_abs_file_path(f"assets/{icon_name}.ppm")
+                get_abs_file_path(f"assets/{icon_name}.png")
             ).convert("RGB")
             self._icon_name = icon_name
+            print(self._icon_name)
         self._icon.resize(
             (self._rgb_matrix.width, self._rgb_matrix.height), Image.ANTIALIAS
         )
@@ -65,8 +66,8 @@ class WeatherView(BaseView):
     def _render(self):
         # Get weather data
         weather_data = Data.get("weather")
-        condition = WeatherCondition.CLOUDS
-        temperature = "0"
+        condition = WeatherCondition.SNOW
+        temperature = "0.1"
         if weather_data:
             temperature = str(weather_data.current.temperature)
             condition = weather_data.current.condition
@@ -85,7 +86,7 @@ class WeatherView(BaseView):
             )
             + condition_icon_data.get("x_offset", 0)
         )
-
+        #print("this thing")
         # Render condition icon and temperature
         self._render_condition_icon(
             icon_name=condition_icon_data["name"],
@@ -96,5 +97,5 @@ class WeatherView(BaseView):
         self._render_temperature(
             temperature=temperature,
             x_pos=x_pos + CONDITION_ICON_WIDTH + margin_width,
-            y_pos=center_object(center_pos=8, obj_length=self._font_size["height"]),
+            y_pos=center_object(center_pos=58, obj_length=self._font_size["height"]),
         )

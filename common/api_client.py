@@ -43,8 +43,8 @@ class APIClient(ABC):
         if not headers:
             headers = {}
 
-        if cls.api_key_param:
-            params[cls.api_key_param] = cls._get_api_key()
+        #if cls.api_key_param:
+            #params[cls.api_key_param] = cls._get_api_key()
 
         session = requests.Session()
         response = session.request(

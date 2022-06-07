@@ -2,7 +2,7 @@ from rgbmatrix import graphics
 
 from animations.base_animations import BaseAnimation
 from graphics.gradient import Gradient
-
+import random
 
 class PulsingTextAnimation(BaseAnimation):
     def __init__(
@@ -23,9 +23,16 @@ class PulsingTextAnimation(BaseAnimation):
         self._y_pos = y_pos
 
     def _advance_frame(self, canvas):
-        gradient_reset = self._gradient.advance_color()
+        gradient_reset = self._gradient.advance_color()   
         if gradient_reset:
             self.increment_completed_cycles()
+            #wandering
+            self._x_pos = self._x_pos + random.randint(-30, 30)
+            self._y_pos = self._y_pos + random.randint(-30, 30)
+            if self._x_pos > 220 or self._x_pos < -50:
+                self._x_pos = 0
+            if self._y_pos > 200 or self._y_pos < -50:
+                self._y_pos = 0 
 
     def _render_frame(self, canvas):
         color = self._gradient.get_current_color()
