@@ -131,7 +131,7 @@ dmypy.json
 # Misc
 config.json
 .DS_Store
-.png
-.jpg
-.jpeg
+*.png
+*.jpg
+*.jpeg
 settings.json
