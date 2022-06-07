@@ -62,8 +62,8 @@ def parse_args():
     parser.add_argument(
         "--led-slowdown-gpio",
         action="store",
-        help="Slow down writing to GPIO. Range: 0..4. (Default: 3)",
-        default=4,
+        help="Slow down writing to GPIO. Range: 0..4. (Default: 4)",
+        default=3,
         choices=range(5),
         type=int,
     )
@@ -78,7 +78,7 @@ def parse_args():
     parser.add_argument(
         "--led-pwm-dither-bits",
         action="store",
-        help="default 2",
+        help="default 0",
         default=0,
         choices=range(5),
         type=int,

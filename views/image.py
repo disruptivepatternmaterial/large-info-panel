@@ -44,7 +44,7 @@ class ImageView(BaseView):
         #get_abs_file_path(f"assets/island-summer-Meredith-Moench.png")
         self._icon = Image.open("/home/ntableman/sunrise-alarm-clock/artwork/" + 
                 random.choice(os.listdir("/home/ntableman/sunrise-alarm-clock/artwork"))
-            ).convert("RGB").resize((256, 192), Image.ADAPTIVE)
+            ).convert("RGB").resize((256, 192), Image.ANTIALIAS)
         #curl -H "Authorization: Bearer eyJrIjoiQlF6cExqS3pxVWZxZjJqTm1FaTFqOGRoNFVZRUNzU1oiLCJuIjoidGVzdGluZy1wYW5lbC1ncmFiYmVyIiwiaWQiOjF9" http://lf-hub:3000/api/dashboards/home
         #auth_token='eyJrIjoiQlF6cExqS3pxVWZxZjJqTm1FaTFqOGRoNFVZRUNzU1oiLCJuIjoidGVzdGluZy1wYW5lbC1ncmFiYmVyIiwiaWQiOjF9'
         #head = {'Authorization': 'Bearer ' + auth_token}

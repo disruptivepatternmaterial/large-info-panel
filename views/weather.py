@@ -71,6 +71,8 @@ class WeatherView(BaseView):
         if weather_data:
             temperature = str(weather_data.current.temperature)
             condition = weather_data.current.condition
+            sunrise =  weather_data.current.sunrise
+            sunposition =  weather_data.current.sunposition
 
         # Determine x position of condition icon
         condition_icon_data = WEATHER_CONDITION_ICON_MAP[condition]

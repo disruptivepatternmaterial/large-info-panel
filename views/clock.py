@@ -10,6 +10,7 @@ from views.base_views import BaseView
 from PIL import Image
 import random
 import os
+import requests
 
 
 class ClockView(BaseView):
@@ -36,15 +37,43 @@ class ClockView(BaseView):
             color,
             text,
         )
-        self._icon = Image.open("/home/ntableman/sunrise-alarm-clock/assets/bellinghamflag-30.png")
-        self._icon.resize(
-            (30,18), Image.ANTIALIAS
-        )
-        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 5, 30, unsafe=False)
-        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 55, 30, unsafe=False)
-        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 105, 30, unsafe=False)
-        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 155, 30, unsafe=False)
-        self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 205, 30, unsafe=False)
+
+    def _render_holiday(self):
+        color = graphics.Color(*Config.get()["clock"]["location_color"])
+        font, font_size = Font.get_font(FontStyle.MEDIUM)
+        text = "Bellingham, Washington"
+        x_pos = center_text(center_pos=128, text=text, font_width=font_size["width"])
+        url = "https://holidays.abstractapi.com/v1/?api_key=967504e91290433cbc8909684b7e9aa8&country=US&year=" + datetime.now().strftime("%Y") + "&month=12&day=25"
+        if datetime.now().minute == 35:
+            response = requests.get(url)
+            fish = response.json()
+        else:
+            fish = []
+
+        if fish:
+            text = fish[0]["name"]
+        else:
+            text = "Bellingham, Washington"
+        graphics.DrawText(
+            self._offscreen_canvas,
+            font,
+            x_pos,
+            30,
+            color,
+            text,
+        )    
+        #self._icon = Image.open("/home/ntableman/sunrise-alarm-clock/assets/bellinghamflag-30.png")
+        #self._icon.resize(
+        #    (30,18), Image.ANTIALIAS
+        #)
+
+        
+        
+        #self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 5, 30, unsafe=False)
+        #self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 55, 30, unsafe=False)
+        #self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 105, 30, unsafe=False)
+        #self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 155, 30, unsafe=False)
+        #self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 205, 30, unsafe=False)
 
     def _render_time(self):
         color = graphics.Color(*Config.get()["clock"]["time_color"])
@@ -55,7 +84,7 @@ class ClockView(BaseView):
             self._offscreen_canvas,
             font,
             x_pos,
-            150,
+            148,
             color,
             time,
         )
@@ -97,6 +126,7 @@ class ClockView(BaseView):
         # Render location and time
         self._render_location()
         self._render_time()
+        #self._render_holiday()
 
         # Render outline animation
         self._outline_canvas_animation.render(canvas=self._offscreen_canvas)
