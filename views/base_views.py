@@ -19,6 +19,7 @@ class BaseView(StoppableThread, ABC):
         pass
 
     def run(self):
+        self._rgb_matrix.brightness = 5
         while True:
             self._offscreen_canvas.Clear()
             self._render()
@@ -26,5 +27,9 @@ class BaseView(StoppableThread, ABC):
                 self._offscreen_canvas
             )
             time.sleep(self._render_delay)
+            if self._rgb_matrix.brightness < 100:
+                self._rgb_matrix.brightness = self._rgb_matrix.brightness + 5
             if self.stopped:
                 break
+    
+        

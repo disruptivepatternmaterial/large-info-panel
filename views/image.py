@@ -16,10 +16,11 @@ import random
 import os
 import requests
 from io import BytesIO
+import time
 
 class ImageView(BaseView):
     _render_delay = Config.get()["timing"]["imageswap"]
-
+    
     def __init__(self, rgb_matrix: RGBMatrix):
         super().__init__(rgb_matrix)
         self._icon = None
@@ -54,14 +55,22 @@ class ImageView(BaseView):
         #self._icon.resize(
         #    (256, 192)
         #)
+        #self._rgb_matrix.brightness = self._image_brightness
         self._offscreen_canvas.SetImage(self._icon, 0, 0, unsafe=True)
+        #for x in range(20, 100, 5):
+        #    self._rgb_matrix.brightness = x
+        #    print(x)
+        #    time.sleep(.01)
+        #self._image_brightness = self._image_brightness + 10
+        #print(self._image_brightness)
 
     def _render(self):
         # Get weather data
-
         # Render condition icon and temperature
         self._render_condition_icon()
-        self._render_temperature()
+
+        #self._render_temperature()
+
         #self._outline_canvas_animation.render(canvas=self._offscreen_canvas)
 
    #http://lf-hub:3000/d/9yd-Cgj7z/small-border-wait-times?orgId=1&refresh=1m

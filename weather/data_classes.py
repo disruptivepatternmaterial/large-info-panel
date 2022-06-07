@@ -13,7 +13,6 @@ class Weather:
         self.sunrise = datetime.fromtimestamp(sunrise)
         self.sunposition = datetime.fromtimestamp(sunposition)
 
-
 class WeatherData:
     def __init__(self, current: Weather):
         self.current = current
