@@ -43,7 +43,7 @@ def parse_args():
         "--led-brightness",
         action="store",
         help="Sets brightness level. Range: 1..100. (Default: 100)",
-        default=75,
+        default=90,
         type=int,
     )
     parser.add_argument(
@@ -63,14 +63,14 @@ def parse_args():
         "--led-slowdown-gpio",
         action="store",
         help="Slow down writing to GPIO. Range: 0..4. (Default: 4)",
-        default=3,
+        default=4,
         choices=range(5),
         type=int,
     )
     parser.add_argument(
         "--led-pwm-lsb-nanoseconds",
         action="store",
-        help="default 50",
+        help="default 60",
         default=50,
         choices=range(5),
         type=int,
@@ -122,5 +122,5 @@ try:
 except KeyboardInterrupt:
     print("\nExiting.\n")
     main_controller.stop()
-    main_controller.join()
+    #main_controller.join()
     sys.exit(0)
