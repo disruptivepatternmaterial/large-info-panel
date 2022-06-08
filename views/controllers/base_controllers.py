@@ -33,7 +33,6 @@ class BaseController(StoppableThread, ABC):
     def run(self):
         if not self._current_thread.is_alive():
             self._current_thread.start()
-
         while True:
             self._update_thread()
             time.sleep(1)

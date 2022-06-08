@@ -19,8 +19,10 @@ from io import BytesIO
 import time
 
 class ImageView(BaseView):
-    _render_delay = Config.get()["timing"]["imageswap"]
-    
+    #_render_delay = Config.get()["timing"]["imageswap"]
+    _render_delay = 0.05
+    _render_type = "image"
+
     def __init__(self, rgb_matrix: RGBMatrix):
         super().__init__(rgb_matrix)
         self._icon = None
@@ -41,7 +43,7 @@ class ImageView(BaseView):
             wait_until_armed = False,
         )
 
-    def _render_condition_icon(self):
+    def _render_image(self):
         #get_abs_file_path(f"assets/island-summer-Meredith-Moench.png")
         self._icon = Image.open("/home/ntableman/sunrise-alarm-clock/artwork/" + 
                 random.choice(os.listdir("/home/ntableman/sunrise-alarm-clock/artwork"))
@@ -55,22 +57,13 @@ class ImageView(BaseView):
         #self._icon.resize(
         #    (256, 192)
         #)
-        #self._rgb_matrix.brightness = self._image_brightness
         self._offscreen_canvas.SetImage(self._icon, 0, 0, unsafe=True)
-        #for x in range(20, 100, 5):
-        #    self._rgb_matrix.brightness = x
-        #    print(x)
-        #    time.sleep(.01)
-        #self._image_brightness = self._image_brightness + 10
-        #print(self._image_brightness)
+    
 
     def _render(self):
-        # Get weather data
-        # Render condition icon and temperature
-        self._render_condition_icon()
-
+        self._render_image()
+        #self._rgb_matrix.brightness = 90
         #self._render_temperature()
-
         #self._outline_canvas_animation.render(canvas=self._offscreen_canvas)
 
    #http://lf-hub:3000/d/9yd-Cgj7z/small-border-wait-times?orgId=1&refresh=1m

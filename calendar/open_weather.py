@@ -42,10 +42,10 @@ class OpenWeatherAPIClient(APIClient):
         sunrise=round(response2["times"]["sunrise"]["ts"] / 1000, 0)
         sunposition=round(response2["altitudePercent"], 2)
 
-        print(temperature)
-        print(condition)
-        print(sunrise)
-        print(sunposition)
+        #print(temperature)
+        #print(condition)
+        #print(sunrise)
+        #print(sunposition)
 
         #print(response)
 

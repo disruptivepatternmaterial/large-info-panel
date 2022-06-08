@@ -57,7 +57,7 @@ class WeatherView(BaseView):
                 get_abs_file_path(f"assets/{icon_name}.png")
             ).convert("RGB")
             self._icon_name = icon_name
-            print(self._icon_name)
+            #print(self._icon_name)
         self._icon.resize(
             (self._rgb_matrix.width, self._rgb_matrix.height), Image.ANTIALIAS
         )

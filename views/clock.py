@@ -11,10 +11,11 @@ from PIL import Image
 import random
 import os
 import requests
+import time
 
 
 class ClockView(BaseView):
-    _render_delay = .05
+    _render_delay = 0.05
 
     def __init__(self, rgb_matrix: RGBMatrix):
         super().__init__(rgb_matrix)
@@ -66,9 +67,6 @@ class ClockView(BaseView):
         #self._icon.resize(
         #    (30,18), Image.ANTIALIAS
         #)
-
-        
-        
         #self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 5, 30, unsafe=False)
         #self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 55, 30, unsafe=False)
         #self._offscreen_canvas.SetImage(self._icon.convert("RGB"), 105, 30, unsafe=False)
@@ -130,3 +128,4 @@ class ClockView(BaseView):
 
         # Render outline animation
         self._outline_canvas_animation.render(canvas=self._offscreen_canvas)
+

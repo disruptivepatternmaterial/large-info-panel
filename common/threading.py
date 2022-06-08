@@ -26,21 +26,26 @@ class RestartableThread:
     def __init__(self, thread: Type[StoppableThread], *args, **kwargs):
         self._args, self._kwargs = args, kwargs
         self._thread = thread
+        #print(thread)
         self.reset()
 
     def is_alive(self) -> bool:
         return self.instance.is_alive()
 
     def reset(self):
+        #print("reset")
         self.instance = self._thread(*self._args, **self._kwargs)
 
     def start(self):
+        #print("start")
         self.instance.start()
 
     def join(self):
+        #print("join")
         self.instance.join()
 
     def stop(self):
+        #print("stop")
         self.instance.stop()
 
 

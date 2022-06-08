@@ -31,7 +31,9 @@ class LoopingThreadsController(BaseController):
 
     def _update_thread(self):
         if self._loop_count == self._thread_change_delay:
+            #print("fish")
             self._switch_to_next_thread()
+            
 
     def _find_thread_by_key(self, key: str) -> int:
         for index, thread in enumerate(self._threads):

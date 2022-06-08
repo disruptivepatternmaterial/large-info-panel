@@ -12,6 +12,7 @@ from views.night_time import NightTimeView
 from views.sunrise import SunriseView
 from views.weather import WeatherView
 from views.image import ImageView
+import time
 
 class MainController(BaseController):
     def __init__(self, rgb_matrix: RGBMatrix, *args, **kwargs):
@@ -69,20 +70,21 @@ class MainController(BaseController):
         if not weather_data:
             #print("bad wx")
             return
-
+        
         current_time = datetime.now()
         sunrise_start = weather_data.current.sunrise
         sunrise_end = sunrise_start + timedelta(minutes=Config.get()["sunrise"]["duration"])
+
         # Switch to the sunrise view
         if sunrise_start <= current_time <= sunrise_end:
             # Only switch views if we aren't showing it already
             if self._current_thread != self._sunrise_controller:
                 self._switch_thread(thread=self._sunrise_controller)
         # Switch to the night time view
-        elif current_time.hour >= Config.get()["night_time"]["start_time"] or current_time.hour < sunrise_start.hour:
+        #elif current_time.hour >= Config.get()["night_time"]["start_time"] or current_time.hour < sunrise_start.hour:
             # Only switch views if we aren't showing it already
-            if self._current_thread != self._night_time_controller:
-                self._switch_thread(thread=self._night_time_controller)
+        #    if self._current_thread != self._night_time_controller:
+        #        self._switch_thread(thread=self._night_time_controller)
         # Switch to the clock and weather view
         else:
             # Only switch views if we aren't showing it already

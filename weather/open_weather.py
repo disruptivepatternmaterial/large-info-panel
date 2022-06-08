@@ -42,13 +42,6 @@ class OpenWeatherAPIClient(APIClient):
         sunrise=round(response2["times"]["sunrise"]["ts"] / 1000, 0)
         sunposition=round(response2["altitudePercent"], 2)
 
-        print(temperature)
-        print(condition)
-        print(sunrise)
-        print(sunposition)
-
-        #print(response)
-
         return Weather(
             temperature,
             #temperature=int(response["main"]["temp"]),
@@ -60,13 +53,11 @@ class OpenWeatherAPIClient(APIClient):
             #sunrise=response["sys"]["sunrise"],
         )
 
-
-
 class OpenWeatherDataThread(DataThread):
     def _fetch_data(self) -> WeatherData:
         try:
             current_weather = OpenWeatherAPIClient.get_current_weather()
-            print(current_weather)
+
         # If call fails, just return existing data
         except:
             return self._data
