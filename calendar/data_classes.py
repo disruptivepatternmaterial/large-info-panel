@@ -1,19 +1,14 @@
 from datetime import datetime
 
-from weather.constants import WeatherCondition
+from calendar.constants import HolidaysDecorations
 
 
-class Weather:
+class Calendar:
     def __init__(self, temperature: float, condition: str, sunrise: float, sunposition: float):
-        self.temperature = temperature
-        try:
-            self.condition = WeatherCondition(condition)
-        except ValueError:
-            self.condition = WeatherCondition.SNOW
-        self.sunrise = datetime.fromtimestamp(sunrise)
-        self.sunposition = datetime.fromtimestamp(sunposition)
+        #data
+        pass
 
 
-class WeatherData:
-    def __init__(self, current: Weather):
+class CalendarData:
+    def __init__(self, current: Calendar):
         self.current = current

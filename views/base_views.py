@@ -50,7 +50,7 @@ class BaseView(StoppableThread, ABC):
                 )
                 time.sleep(self._render_delay)
 
-                if self._rgb_matrix.brightness < 90:
+                if self._rgb_matrix.brightness < 80:
                     self._rgb_matrix.brightness = self._rgb_matrix.brightness + 5
                     print(self._rgb_matrix.brightness)
 
@@ -66,7 +66,7 @@ class BaseView(StoppableThread, ABC):
                         )
 
                 else:
-                    for x in range(90, 0, -10):
+                    for x in range(80, 0, -10):
                         time.sleep(.05)
                         self._offscreen_canvas.Clear()
                         self._render()

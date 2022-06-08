@@ -4,7 +4,7 @@ from typing import Dict
 from config import Config
 from common.api_client import APIClient, RequestMethod
 from common.threading import DataThread
-from weather.data_classes import Weather, WeatherData
+from calendar.data_classes import Calendar, CalendarData
 
 
 class OpenWeatherAPIClient(APIClient):
