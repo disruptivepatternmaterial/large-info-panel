@@ -45,7 +45,7 @@ class Font:
                     size = dict(width=8, height=18)
                 elif font_name.startswith("plex-24"):
                     #MEDIUM
-                    size = dict(width=13, height=24)
+                    size = dict(width=13.8, height=24)
                 elif font_name.startswith("plex-30"):
                     #LARGE
                     size = dict(width=19, height=30)

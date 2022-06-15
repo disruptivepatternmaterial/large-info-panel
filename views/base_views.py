@@ -66,7 +66,7 @@ class BaseView(StoppableThread, ABC):
                         )
 
                 else:
-                    for x in range(80, 0, -10):
+                    for x in range(80, 0, -5):
                         time.sleep(.05)
                         self._offscreen_canvas.Clear()
                         self._render()
