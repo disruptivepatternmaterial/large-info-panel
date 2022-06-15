@@ -31,33 +31,25 @@ class OpenWeatherAPIClient(APIClient):
             #path="weather",
             #params=dict(q=location, units=config["weather"]["units"]),
         )
-        temperature=float(response[5]["_value"])
-        condition="SNOW"
 
         response2 = cls._make_request(
             method=RequestMethod.GET,
             path="sundata/",
         )
-        #imes.sunrise.ts
+        #times.sunrise.ts
         sunrise=round(response2["times"]["sunrise"]["ts"] / 1000, 0)
         sunposition=round(response2["altitudePercent"], 2)
 
         return Weather(
-            temperature,
-            #temperature=int(response["main"]["temp"]),
-            condition,
+            response,
             sunrise,
             sunposition,
-            #condition=response["weather"][0]["main"],
-            #sunrise=1664566938,
-            #sunrise=response["sys"]["sunrise"],
         )
 
 class OpenWeatherDataThread(DataThread):
     def _fetch_data(self) -> WeatherData:
         try:
             current_weather = OpenWeatherAPIClient.get_current_weather()
-
         # If call fails, just return existing data
         except:
             return self._data
