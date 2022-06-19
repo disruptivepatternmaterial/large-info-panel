@@ -8,7 +8,7 @@ from config import Config
 from graphics.font import Font, FontStyle
 from graphics.utils import center_text
 from views.base_views import BaseView
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageFont
 import random
 import os
 import requests
@@ -39,14 +39,14 @@ class ClockView(BaseView):
  
     def _render_location(self):
         color = graphics.Color(*Config.get()["clock"]["location_color"])
-        font, font_size = Font.get_font(FontStyle.MEDIUM)
-        text = "Bellingham Washington"
+        font, font_size = Font.get_font(FontStyle.LARGE) 
+        text = "bäärgsiitsch"
         x_pos = center_text(center_pos=128, text=text, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,
             x_pos,
-            21,
+            25,
             color,
             text,
         )
@@ -79,7 +79,7 @@ class ClockView(BaseView):
 
     def _render_time(self):
         color = graphics.Color(*Config.get()["clock"]["time_color"])
-        font, font_size = Font.get_font(FontStyle.HUGE)
+        font, font_size = Font.get_font(FontStyle.XL)
         time = datetime.now().strftime("%A")
         x_pos = center_text(center_pos=128, text=time, font_width=font_size["width"])
         graphics.DrawText(
@@ -96,8 +96,8 @@ class ClockView(BaseView):
         suffixes = { 1: "st", 2: "nd", 3: "rd" }
         i = n if (n < 20) else (n % 10)
         suffix = suffixes.get(i, 'th')
-        time = str(this_month) + " " + str(n) + suffix
-        x_pos = center_text(center_pos=128, text=time, font_width=font_size["width"])
+        time = str(this_month) + " • " + str(n) + suffix
+        x_pos = center_text(center_pos=150, text=time, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,
@@ -109,7 +109,7 @@ class ClockView(BaseView):
 
         #clock
         time = datetime.now().strftime("%X") #%X
-        font, font_size = Font.get_font(FontStyle.MASSIVE)
+        font, font_size = Font.get_font(FontStyle.HUGE)
         x_pos = center_text(center_pos=128, text=time, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,

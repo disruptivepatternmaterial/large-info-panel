@@ -1,6 +1,6 @@
 import time
 from abc import ABC, abstractmethod
-
+import sys
 from rgbmatrix import RGBMatrix
 
 from common.threading import StoppableThread
@@ -26,7 +26,7 @@ class BaseView(StoppableThread, ABC):
             if self._render_type == "image" and self._stop_rendering == 0:
                 self._offscreen_canvas.Clear()
                 self._render()
-                time.sleep(.2)
+                time.sleep(.1)
                 self._offscreen_canvas = self._rgb_matrix.SwapOnVSync(
                     self._offscreen_canvas
                 )
@@ -37,11 +37,11 @@ class BaseView(StoppableThread, ABC):
                     self._offscreen_canvas = self._rgb_matrix.SwapOnVSync(
                         self._offscreen_canvas
                     )
-                    print(x)
+                    #print(x)
                     time.sleep(.01)
                 #time.sleep(self._render_delay)
                 self._stop_rendering = 1
-                print("image loop done")
+                #print("image loop done")
             elif self._render_type != "image":
                 self._offscreen_canvas.Clear()
                 self._render()
@@ -52,7 +52,7 @@ class BaseView(StoppableThread, ABC):
 
                 if self._rgb_matrix.brightness < 80:
                     self._rgb_matrix.brightness = self._rgb_matrix.brightness + 5
-                    print(self._rgb_matrix.brightness)
+                    #print(self._rgb_matrix.brightness)
 
             if self.stopped:
                 if self._render_type == "image":
@@ -67,15 +67,13 @@ class BaseView(StoppableThread, ABC):
 
                 else:
                     for x in range(80, 0, -5):
-                        time.sleep(.05)
+                        time.sleep(.01)
                         self._offscreen_canvas.Clear()
                         self._render()
                         self._offscreen_canvas = self._rgb_matrix.SwapOnVSync(
                             self._offscreen_canvas
                         )
                         self._rgb_matrix.brightness = x
-                        print('meow')
-
                 break
     
 #ok so since this class is the base for all the render it excutes this run(self), image works because it makes the loop stop with longer _render_delay

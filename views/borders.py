@@ -25,7 +25,7 @@ WEATHER_CONDITION_ICON_MAP = {
     WeatherCondition.SNOW: dict(name="snowy", x_offset=-1),
 }
 
-class WeatherView(BaseView):
+class BorderView(BaseView):
     _render_delay = 5
 
     def __init__(self, rgb_matrix: RGBMatrix):

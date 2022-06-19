@@ -13,13 +13,19 @@ class FontStyle(Enum):
     #SMALL = "6x9"
     #MEDIUM = "9x15"
     #LARGE = "10x20"
-    TINY = "plex-12"
+    TINY = "plex-14"
     SMALL = "plex-18"
     MEDIUM = "plex-24"
     LARGE = "plex-30"
-    HUGE = "plex-40"
-    MASSIVE = "plex-60"
-    ITALIC = "plex-ital-40"
+    XL = "plex-36"
+    XXL = "plex-48"
+    HUGE = "plex-60"
+    MASSIVE = "plex-72"
+
+#CharacterWidth(self, uint32_t char):
+#return self.__font.CharacterWidth(char)
+#CreateFrameCanvas
+#Fill
 
 class Font:
     _font_cache = {}
@@ -37,27 +43,32 @@ class Font:
                 font = graphics.Font()
                 font.LoadFont(path)
                 size = None
-                if font_name.startswith("plex-12"):
+                if font_name.startswith("plex-14"):
                     #TINY
-                    size = dict(width=5, height=12)
+                    size = dict(width=7, height=14)
                 elif font_name.startswith("plex-18"):
                     #SMALL
-                    size = dict(width=8, height=18)
+                    size = dict(width=6, height=18)
                 elif font_name.startswith("plex-24"):
                     #MEDIUM
                     size = dict(width=13.8, height=24)
                 elif font_name.startswith("plex-30"):
                     #LARGE
-                    size = dict(width=19, height=30)
-                elif font_name.startswith("plex-40"):
-                    #HUGE
-                    size = dict(width=21, height=40)
-                elif font_name.startswith("plex-ital-40"):
+                    size = dict(width=12.5, height=30)
+                elif font_name.startswith("plex-36"):
+                    #XL
+                    size = dict(width=19.5, height=36)
+                elif font_name.startswith("plex-48"):
                     #ITALIC
-                    size = dict(width=28, height=40)
+                    size = dict(width=24, height=48)
+                elif font_name.startswith("plex-60"):
+                    #ITALIC
+                    size = dict(width=28, height=60)
+                elif font_name.startswith("plex-72"):
+                    #ITALIC
+                    size = dict(width=36, height=72)
                 else:
-                    #MASSIVE
-                    size = dict(width=28, height=40)   
+                    size = dict(width=20, height=40)   
                 #if font_name.startswith("tom"):
                 #    size = dict(width=4, height=6)
                 #else:

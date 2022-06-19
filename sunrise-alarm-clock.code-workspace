@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "WLED",
+			"path": "../../../Users/ntableman/Documents/GitHub/WLED"
+		}
+	],
+	"settings": {
+		"python.languageServer": "Pylance",
+		"circuitpython.board.version": null,
+		"python.linting.pylintEnabled": false,
+		"python.analysis.diagnosticSeverityOverrides": {
+			"reportMissingModuleSource": "none"
+		},
+		"python.analysis.extraPaths": [
+			"",
+			"/Users/ntableman/.vscode/extensions/joedevivo.vscode-circuitpython-0.1.17-darwin-arm64/stubs",
+			"/Users/ntableman/Library/Application Support/Code/User/globalStorage/joedevivo.vscode-circuitpython/bundle/20220618/adafruit-circuitpython-bundle-py-20220618/lib"
+		]
+	}
+}
