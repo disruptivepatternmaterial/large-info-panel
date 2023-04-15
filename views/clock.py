@@ -41,7 +41,7 @@ class ClockView(BaseView):
         color = graphics.Color(*Config.get()["clock"]["location_color"])
         font, font_size = Font.get_font(FontStyle.LARGE) 
         text = "bäärgsiitsch"
-        x_pos = center_text(center_pos=128, text=text, font_width=font_size["width"])
+        x_pos = center_text(center_pos=127, text=text, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,
@@ -55,7 +55,7 @@ class ClockView(BaseView):
         color = graphics.Color(*Config.get()["clock"]["location_color"])
         font, font_size = Font.get_font(FontStyle.MEDIUM)
         text = "Bellingham, Washington"
-        x_pos = center_text(center_pos=128, text=text, font_width=font_size["width"])
+        x_pos = center_text(center_pos=127, text=text, font_width=font_size["width"])
         if datetime.now().minute == 2:
             url = "https://holidays.abstractapi.com/v1/?api_key=&country=US&year=" + datetime.now().strftime("%Y") + "&month=12&day="
             response = requests.get(url)
@@ -81,7 +81,7 @@ class ClockView(BaseView):
         color = graphics.Color(*Config.get()["clock"]["time_color"])
         font, font_size = Font.get_font(FontStyle.XL)
         time = datetime.now().strftime("%A")
-        x_pos = center_text(center_pos=120, text=time, font_width=font_size["width"])
+        x_pos = center_text(center_pos=127, text=time, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,
@@ -96,13 +96,13 @@ class ClockView(BaseView):
         suffixes = { 1: "st", 2: "nd", 3: "rd" }
         i = n if (n < 20) else (n % 10)
         suffix = suffixes.get(i, 'th')
-        time = str(this_month) + " • " + str(n) + suffix
-        x_pos = center_text(center_pos=150, text=time, font_width=font_size["width"])
+        time = str(this_month) + "•" + str(n) + suffix
+        x_pos = center_text(center_pos=127, text=time, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,
             x_pos,
-            186,
+            183,
             color,
             time,
         )
@@ -110,7 +110,7 @@ class ClockView(BaseView):
         #clock
         time = datetime.now().strftime("%X") #%X
         font, font_size = Font.get_font(FontStyle.HUGE)
-        x_pos = center_text(center_pos=128, text=time, font_width=font_size["width"])
+        x_pos = center_text(center_pos=127, text=time, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,

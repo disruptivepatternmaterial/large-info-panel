@@ -1,1 +1,1 @@
-# sunrise-alarm-clock
+# large info panel clock and all that

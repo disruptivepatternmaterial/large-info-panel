@@ -1,12 +1,8 @@
 import os
 from typing import Dict, Optional, Tuple
-
 from enum import Enum
-
 from rgbmatrix import graphics
-
 from utils import get_abs_file_path
-
 
 class FontStyle(Enum):
     #TINY = "tom-thumb"
@@ -48,22 +44,22 @@ class Font:
                     size = dict(width=7, height=14)
                 elif font_name.startswith("plex-18"):
                     #SMALL
-                    size = dict(width=6, height=18)
+                    size = dict(width=9, height=18)
                 elif font_name.startswith("plex-24"):
                     #MEDIUM
-                    size = dict(width=13.8, height=24)
+                    size = dict(width=12, height=24)
                 elif font_name.startswith("plex-30"):
                     #LARGE
-                    size = dict(width=12.5, height=30)
+                    size = dict(width=15, height=30)
                 elif font_name.startswith("plex-36"):
                     #XL
-                    size = dict(width=19.5, height=36)
+                    size = dict(width=18, height=36)
                 elif font_name.startswith("plex-48"):
                     #ITALIC
                     size = dict(width=24, height=48)
                 elif font_name.startswith("plex-60"):
                     #ITALIC
-                    size = dict(width=28, height=60)
+                    size = dict(width=30, height=60)
                 elif font_name.startswith("plex-72"):
                     #ITALIC
                     size = dict(width=36, height=72)

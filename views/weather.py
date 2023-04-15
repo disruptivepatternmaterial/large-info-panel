@@ -12,6 +12,7 @@ from graphics.utils import center_text
 from utils import get_abs_file_path
 from views.base_views import BaseView
 from weather.constants import WeatherCondition
+from graphics.shapes import draw_rectangle
 
 CELCIUS_INDICATOR_WIDTH = 3
 CONDITION_ICON_WIDTH = 15
@@ -31,11 +32,12 @@ class WeatherView(BaseView):
     def __init__(self, rgb_matrix: RGBMatrix):
         super().__init__(rgb_matrix)
         self._font, self._font_size = Font.get_font(FontStyle.SMALL)
-        self._col1 = 0
-        self._col2 = 70
-        self._col3 = 120
-        self._col4 = 170
-        self._col5 = 220
+        self._col1 = 2
+        self._col2 = 75
+        self._col3 = 105
+        self._col4 = 135
+        self._col5 = 175
+        self._col6 = 205
 
     def _render_colums_headers(self):
         color = graphics.Color(*Config.get()["weather"]["temperature_color"])
@@ -46,7 +48,7 @@ class WeatherView(BaseView):
             self._col1 + 1,
             20,
             color,
-            "room",
+            "",
         )
         pass
         graphics.DrawText(
@@ -65,7 +67,7 @@ class WeatherView(BaseView):
             self._col3 + 1,
             20,
             color,
-            "RH%",
+            "RH",
         )
         pass
 
@@ -75,7 +77,7 @@ class WeatherView(BaseView):
             self._col4 + 1,
             20,
             color,
-            "pm25",
+            "AQI",
         )
         pass
 
@@ -88,6 +90,16 @@ class WeatherView(BaseView):
             "CO2",
         )
         pass
+
+        graphics.DrawText(
+            self._offscreen_canvas,
+            self._font,
+            self._col6 + 1,
+            20,
+            color,
+            "VOC",
+        )
+        pass   
 
     def _render_temperature(self, data: json, x_pos: int, y_pos: int):
 
@@ -153,8 +165,17 @@ class WeatherView(BaseView):
                 graphics.Color(int(data[i]["co2-color"][0]),int(data[i]["co2-color"][1]),int(data[i]["co2-color"][2])),
                 co2,
             )
+
+            graphics.DrawText(
+                self._offscreen_canvas,
+                self._font,
+                self._col5,
+                y_pos + self._font_size["height"],
+                graphics.Color(int(data[i]["co2-color"][0]),int(data[i]["co2-color"][1]),int(data[i]["co2-color"][2])),
+                co2,
+            )            
             #this moves us down
-            y_pos = y_pos + 25
+            y_pos = y_pos + 20
 
         #graphics.DrawCircle(
         #    self._offscreen_canvas,
