@@ -128,14 +128,14 @@ class ClockView(BaseView):
         if self._last_minute and self._last_minute != current_minute:
             self._outline_canvas_animation.reset_and_arm()
             self._background_counter = 0
-            print("reset and arm")
+            #print("reset and arm")
         self._last_minute = current_minute
 
         # Render location and time
         self._render_background()
         self._render_location()
         self._render_time()
-        #self._render_holiday()
+        # self._render_holiday()
 
         # Render outline animation
         self._outline_canvas_animation.render(canvas=self._offscreen_canvas)
