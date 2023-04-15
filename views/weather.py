@@ -93,12 +93,12 @@ class WeatherView(BaseView):
 
         for i in range(len(data)):
             try:
-                pm25 = str(round(float(data[i]["pm25"]),1)) + ""
+                pm25 = str(round(float(data[i]["PM25"]))) + ""
             except:
                 pm25 = ""
             
             try:
-                co2 = str(round(data[i]["co2"])) + ""
+                co2 = str(round(data[i]["CO2"])) + ""
             except:
                 co2 = ""
 
@@ -123,7 +123,7 @@ class WeatherView(BaseView):
                 self._col2,
                 y_pos + self._font_size["height"],
                 graphics.Color(int(data[i]["temp-color"][0]),int(data[i]["temp-color"][1]),int(data[i]["temp-color"][2])),
-                str(round(data[i]["temperature_F"],1)) + "",
+                str(round(data[i]["Temperature_F"])) + "",
             )
 
             #humidity    
@@ -133,7 +133,7 @@ class WeatherView(BaseView):
                 self._col3,
                 y_pos + self._font_size["height"],
                 graphics.Color(int(data[i]["humidity-color"][0]),int(data[i]["humidity-color"][1]),int(data[i]["humidity-color"][2])),
-                str(round(float(data[i]["humidity"]),1)) + "",
+                str(round(float(data[i]["Humidity"]))) + "",
             )
             #pm25
             graphics.DrawText(

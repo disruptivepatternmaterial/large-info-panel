@@ -36,7 +36,7 @@ class Font:
         if font_name in cls._font_cache:
             return cls._font_cache[font_name]
 
-        font_paths = ["rpi-rgb-led-matrix/fonts"]
+        font_paths = ["fonts"]
         for font_path in font_paths:
             path = get_abs_file_path(f"{font_path}/{font_name}.bdf")
             if os.path.isfile(path):

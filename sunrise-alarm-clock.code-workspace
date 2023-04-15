@@ -17,8 +17,8 @@
 		},
 		"python.analysis.extraPaths": [
 			"",
-			"/Users/ntableman/.vscode/extensions/joedevivo.vscode-circuitpython-0.1.17-darwin-arm64/stubs",
-			"/Users/ntableman/Library/Application Support/Code/User/globalStorage/joedevivo.vscode-circuitpython/bundle/20220619/adafruit-circuitpython-bundle-py-20220619/lib"
+			"/Users/ntableman/.vscode/extensions/joedevivo.vscode-circuitpython-0.1.20-darwin-arm64/stubs",
+			"/Users/ntableman/Library/Application Support/Code/User/globalStorage/joedevivo.vscode-circuitpython/bundle/20230414/adafruit-circuitpython-bundle-py-20230414/lib"
 		]
 	}
 }

@@ -31,9 +31,9 @@ class ClockView(BaseView):
     def _render_background(self):
         if self._background_counter == 0:
             if datetime.now().month == 6:
-                self._background = Image.open("/home/ntableman/sunrise-alarm-clock/assets/BHam-Flag-Pride.png").convert("RGB").resize((254,190), Image.ANTIALIAS).filter(ImageFilter.GaussianBlur(2))
+                self._background = Image.open("/home/ntableman/large-info-panel/assets/BHam-Flag-Pride.png").convert("RGB").resize((254,190), Image.ANTIALIAS).filter(ImageFilter.GaussianBlur(2))
             else:
-                self._background = Image.open("/home/ntableman/sunrise-alarm-clock/assets/bellinghamflag-780x466.png").convert("RGB").resize((254,190), Image.ANTIALIAS).filter(ImageFilter.GaussianBlur(2))
+                self._background = Image.open("/home/ntableman/large-info-panel/assets/bellinghamflag-780x466.png").convert("RGB").resize((254,190), Image.ANTIALIAS).filter(ImageFilter.GaussianBlur(2))
             self._background_counter = 1
         self._offscreen_canvas.SetImage(self._background, 1, 1, unsafe=False)
  
@@ -81,7 +81,7 @@ class ClockView(BaseView):
         color = graphics.Color(*Config.get()["clock"]["time_color"])
         font, font_size = Font.get_font(FontStyle.XL)
         time = datetime.now().strftime("%A")
-        x_pos = center_text(center_pos=128, text=time, font_width=font_size["width"])
+        x_pos = center_text(center_pos=120, text=time, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,
