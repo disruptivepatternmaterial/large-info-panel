@@ -32,16 +32,34 @@ class WeatherView(BaseView):
     def __init__(self, rgb_matrix: RGBMatrix):
         super().__init__(rgb_matrix)
         self._font, self._font_size = Font.get_font(FontStyle.SMALL)
-        self._col1 = 2
-        self._col2 = 75
-        self._col3 = 105
-        self._col4 = 135
-        self._col5 = 175
-        self._col6 = 205
+        self._col1 = 2   #room
+        self._col2 = 75  #temp
+        self._col3 = 102 #rh
+        self._col4 = 130 #AQI
+        self._col5 = 170 #co2
+        self._col6 = 210 #VOC
 
     def _render_colums_headers(self):
         color = graphics.Color(*Config.get()["weather"]["temperature_color"])
-        
+        background = graphics.Color(50,50,50)
+        black = graphics.Color(0,0,0)
+        draw_rectangle(
+            canvas=self._offscreen_canvas,
+            x_pos=0,
+            y_pos=0,
+            height=self._rgb_matrix.width,
+            width=self._rgb_matrix.width,
+            color=background,
+        )
+        draw_rectangle(
+            canvas=self._offscreen_canvas,
+            x_pos=70,
+            y_pos=25,
+            height=self._rgb_matrix.height-2,
+            width=self._rgb_matrix.width-2,
+            color=black,
+        )          
+
         graphics.DrawText(
             self._offscreen_canvas,
             self._font,
@@ -114,6 +132,11 @@ class WeatherView(BaseView):
             except:
                 co2 = ""
 
+            try:
+                voc = str(round(data[i]["VOC"])) + ""
+            except:
+                voc = ""
+
             if data[i]["room"] == 'livingroom':
                 data[i]["room"] = 'living'
             
@@ -169,10 +192,10 @@ class WeatherView(BaseView):
             graphics.DrawText(
                 self._offscreen_canvas,
                 self._font,
-                self._col5,
+                self._col6,
                 y_pos + self._font_size["height"],
-                graphics.Color(int(data[i]["co2-color"][0]),int(data[i]["co2-color"][1]),int(data[i]["co2-color"][2])),
-                co2,
+                graphics.Color(int(data[i]["voc-color"][0]),int(data[i]["voc-color"][1]),int(data[i]["voc-color"][2])),
+                voc,
             )            
             #this moves us down
             y_pos = y_pos + 20
@@ -210,6 +233,8 @@ class WeatherView(BaseView):
         x_pos = 0
         y_pos = 25
         margin_width = 1
+
+
 
         self._render_colums_headers()
 

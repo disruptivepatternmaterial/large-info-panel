@@ -40,4 +40,4 @@ class NightTimeView(BaseView):
 
     def _render(self):
         self._pulsing_text_animation.render(canvas=self._offscreen_canvas)
-        self._pulsing_text_animation._text = "sleepytimes " + datetime.now().strftime("%X")
+        self._pulsing_text_animation._text = "↪sleepytimes " + datetime.now().strftime("%X") + "↩"

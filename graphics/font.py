@@ -23,6 +23,9 @@ class FontStyle(Enum):
 #CreateFrameCanvas
 #Fill
 
+#class FontStringWidth():
+
+
 class Font:
     _font_cache = {}
 
@@ -50,10 +53,10 @@ class Font:
                     size = dict(width=12, height=24)
                 elif font_name.startswith("plex-30"):
                     #LARGE
-                    size = dict(width=15, height=30)
+                    size = dict(width=13, height=30)
                 elif font_name.startswith("plex-36"):
                     #XL
-                    size = dict(width=18, height=36)
+                    size = dict(width=17, height=36)
                 elif font_name.startswith("plex-48"):
                     #ITALIC
                     size = dict(width=24, height=48)

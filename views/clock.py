@@ -6,7 +6,7 @@ from rgbmatrix import graphics, RGBMatrix
 from animations.outline_canvas import OutlineCanvasAnimation
 from config import Config
 from graphics.font import Font, FontStyle
-from graphics.utils import center_text
+from graphics.utils import center_text, center_text_new
 from views.base_views import BaseView
 from PIL import Image, ImageFilter, ImageFont
 import random
@@ -41,7 +41,8 @@ class ClockView(BaseView):
         color = graphics.Color(*Config.get()["clock"]["location_color"])
         font, font_size = Font.get_font(FontStyle.LARGE) 
         text = "bäärgsiitsch"
-        x_pos = center_text(center_pos=127, text=text, font_width=font_size["width"])
+        #x_pos = center_text_new(127, text, font)
+        x_pos = center_text(center_pos=128, text=text, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,
@@ -110,7 +111,7 @@ class ClockView(BaseView):
         #clock
         time = datetime.now().strftime("%X") #%X
         font, font_size = Font.get_font(FontStyle.HUGE)
-        x_pos = center_text(center_pos=127, text=time, font_width=font_size["width"])
+        x_pos = center_text(center_pos=124, text=time, font_width=font_size["width"])
         graphics.DrawText(
             self._offscreen_canvas,
             font,

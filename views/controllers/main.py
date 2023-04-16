@@ -12,6 +12,7 @@ from views.night_time import NightTimeView
 from views.sunrise import SunriseView
 from views.weather import WeatherView
 from views.image import ImageView
+from views.borders import BorderView
 import time
 
 class MainController(BaseController):
@@ -28,7 +29,7 @@ class MainController(BaseController):
                         rgb_matrix=self._rgb_matrix,
                     ),
                 },
-                                {
+                {
                     "key": "image1",
                     "instance": RestartableThread(
                         thread=ImageView,
@@ -48,6 +49,14 @@ class MainController(BaseController):
                     "key": "image2",
                     "instance": RestartableThread(
                         thread=ImageView,
+                        #thread=ClockView,
+                        rgb_matrix=self._rgb_matrix,
+                    ),
+                },
+                {
+                    "key": "borders",
+                    "instance": RestartableThread(
+                        thread=BorderView,
                         #thread=ClockView,
                         rgb_matrix=self._rgb_matrix,
                     ),
